@@ -69,19 +69,19 @@ function App() {
     formData.append('folder', folder);
 
     try {
-      const response = await axios.post('http://localhost:5050/api/maintainability/analyze', formData, {
+      const response = await axios.post('https://maintainability-index-server.vercel.app/api/maintainability/analyze', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       });
 
-      const dataClassResponse = await axios.post('http://localhost:5050/api/maintainability/dataclass', formData, {
+      const dataClassResponse = await axios.post('https://maintainability-index-server.vercel.app/api/maintainability/dataclass', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
 
-      const parallelResponse = await axios.post('http://localhost:5050/api/maintainability/parallel', formData, {
+      const parallelResponse = await axios.post('https://maintainability-index-server.vercel.app/api/maintainability/parallel', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
@@ -128,7 +128,7 @@ function App() {
     }
 
     try {
-      const response = await axios.post('http://localhost:5050/api/maintainability/export-csv', { analysisResults: results, dataClassResults, parallelResults }, { responseType: 'blob' });
+      const response = await axios.post('https://maintainability-index-server.vercel.app/api/maintainability/export-csv', { analysisResults: results, dataClassResults, parallelResults }, { responseType: 'blob' });
 
       const blob = new Blob([response.data], { type: 'text/csv' });
       const url = window.URL.createObjectURL(blob);
