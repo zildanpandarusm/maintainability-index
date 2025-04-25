@@ -2,11 +2,11 @@
   "name": "maintainability-index-app",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/app.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
