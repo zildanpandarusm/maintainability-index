@@ -1,5 +1,6 @@
 import AdmZip from 'adm-zip';
-import phpParser from 'php-parser'; //
+import phpParser from 'php-parser';
+import { Parser as Json2CsvParser } from 'json2csv';
 
 // Fungsi untuk membaca file Java dalam ZIP
 const getPhpFilesFromZip = (zipBuffer) => {
@@ -460,8 +461,6 @@ const calculateNOC = (className, classes, visited = new Set()) => {
 
   return totalNOC;
 };
-
-import { Parser as Json2CsvParser } from 'json2csv';
 
 export const exportCsv = (req, res) => {
   const { analysisResults, dataClassResults, parallelResults } = req.body;
