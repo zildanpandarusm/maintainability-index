@@ -48,6 +48,8 @@ function App() {
     // Reset hasil dan error setiap kali file diubah
     setResults([]);
     setError(null);
+    setDataClassResults([]);
+    setParallelResults([]);
 
     if (file) {
       const fileExtension = file.name.split('.').pop().toLowerCase();
