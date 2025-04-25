@@ -6,7 +6,7 @@ const app = express();
 const port = 5050;
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://maintainability-index.vercel.app/',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
   credentials: true,
