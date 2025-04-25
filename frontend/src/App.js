@@ -37,9 +37,10 @@ function App() {
   const [dataClassResults, setDataClassResults] = useState([]);
   const [parallelResults, setParallelResults] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
-  const [isModalOpen2, setIsModalOpen2] = useState(false); // State for modal visibility
-  const [modalContent, setModalContent] = useState(null); // State for modal content
-  const [modalContent2, setModalContent2] = useState(null); // State for modal content
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const [modalContent2, setModalContent2] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFolderChange = (event) => {
     const file = event.target.files[0];
@@ -69,6 +70,7 @@ function App() {
     const formData = new FormData();
     formData.append('folder', folder);
 
+    setIsLoading(true);
     try {
       const response = await axios.post(`${config.BASE_URL}/api/maintainability/analyze`, formData, {
         headers: {
@@ -93,6 +95,8 @@ function App() {
     } catch (err) {
       console.error(err);
       setError('An error occurred while analyzing the folder. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -150,12 +154,13 @@ function App() {
         <h1>Code Maintainability Analyzer and Code Smell Identification</h1>
 
         <input type="file" accept=".zip" onChange={handleFolderChange} />
-        <button onClick={handleAnalyze}>Analyze</button>
+        <button onClick={handleAnalyze}> {isLoading ? 'Analyzing...' : 'Analyze'}</button>
         <button onClick={handleDownloadCSV}>Download CSV</button>
         <button onClick={() => handleModalOpen2()}>Guide</button>
         <button onClick={() => handleModalOpen()}>About</button>
 
         {error && <p className="error">{error}</p>}
+        {isLoading && <p>Loading, please wait...</p>}
 
         {results.length > 0 ? (
           <div className="results">
