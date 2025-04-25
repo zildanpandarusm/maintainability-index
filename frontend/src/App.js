@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import './App.css';
+import config from './config';
 const COLORS = ['#008000', '#FFD700', '#FF0000']; // Green, Yellow, Red
 
 const calculatePieChartData = (results) => {
@@ -69,21 +70,18 @@ function App() {
     formData.append('folder', folder);
 
     try {
-      const response = await axios.post('https://maintainability-index-server.vercel.app/api/maintainability/analyze', formData, {
+      const response = await axios.post(`${config.BASE_URL}/api/maintainability/analyze`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-        withCredentials: true,
       });
 
-      const dataClassResponse = await axios.post('https://maintainability-index-server.vercel.app/api/maintainability/dataclass', formData, {
+      const dataClassResponse = await axios.post(`${config.BASE_URL}/api/maintainability/dataclass`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
       });
 
-      const parallelResponse = await axios.post('https://maintainability-index-server.vercel.app/api/maintainability/parallel', formData, {
+      const parallelResponse = await axios.post(`${config.BASE_URL}/api/maintainability/parallel`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
       });
 
       console.log('DataClass Smell:', dataClassResponse.data.data);
@@ -128,7 +126,7 @@ function App() {
     }
 
     try {
-      const response = await axios.post('https://maintainability-index-server.vercel.app/api/maintainability/export-csv', { analysisResults: results, dataClassResults, parallelResults }, { responseType: 'blob' });
+      const response = await axios.post(`${config.BASE_URL}/api/maintainability/export-csv`, { analysisResults: results, dataClassResults, parallelResults }, { responseType: 'blob' });
 
       const blob = new Blob([response.data], { type: 'text/csv' });
       const url = window.URL.createObjectURL(blob);
