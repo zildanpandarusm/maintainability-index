@@ -1,0 +1,355 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #365bff 0%, #90a4ff 100%);
+  color: #333;
+  min-height: 100vh;
+}
+
+.App {
+  text-align: center;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 2vw;
+  padding-bottom: 2vw;
+}
+
+.App-header {
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 1300px;
+}
+
+h1 {
+  font-size: 2em; /* Atur ukuran font */
+  font-weight: bold; /* Sesuaikan gaya font */
+  background: linear-gradient(135deg, #365bff 0%, #17c9ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+input[type='file'] {
+  margin: 20px 0;
+  padding: 10px;
+  border: 2px solid rgb(54, 91, 255);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button {
+  padding: 12px 24px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #365bff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: #519aff;
+}
+
+.error {
+  color: #ff0000;
+  margin-top: 10px;
+}
+
+.chart-container {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.results {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.results h2 {
+  color: #162569;
+  margin-bottom: 15px;
+}
+
+.results table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+  table-layout: fixed;
+}
+
+.results table thead {
+  background-color: #519aff;
+}
+
+.results table th,
+.results table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  word-wrap: break-word;
+  font-size: 14px;
+}
+
+.results table th {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.results tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.results tr:hover {
+  background-color: #f1f1f1;
+}
+
+.results thead tr:hover {
+  background-color: #519aff;
+}
+
+.highlight-red {
+  color: #cc0000; /* Dark red text for contrast */
+  font-weight: bold; /* Optional: Make the text bold for emphasis */
+  border-radius: 4px; /* Optional: Rounded corners for a softer look */
+}
+
+.maintainability-high {
+  color: green;
+  font-weight: bold;
+}
+
+.maintainability-medium {
+  color: orange;
+  font-weight: bold;
+}
+
+.maintainability-low {
+  color: red;
+  font-weight: bold;
+}
+
+h4 {
+  margin-top: 20px;
+  color: #519aff;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 5px 0;
+}
+
+/* Basic modal styling */
+/* Style for the modal backdrop (darkens the background) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure it is above other content */
+}
+
+/* Style for the modal content */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 1000px;
+  max-height: 80%;
+  overflow-y: auto; /* Allows scrolling if content overflows */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+/* Close button style */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal ul li {
+  list-style: none;
+}
+
+.modal-content p {
+  text-align: left;
+}
+
+.modal-content p:nth-child(2) {
+  text-align: center;
+}
+
+/* Styling for the headings */
+.modal-content h1,
+.modal-content h2,
+.modal-content h3 {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  margin-top: 20px;
+}
+
+.modal-content h1 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.modal-content h2 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.modal-content h3 {
+  font-size: 18px;
+}
+
+.modal-content ul li {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.modal-content table thead th {
+  background-color: #519aff;
+  color: #fff;
+  text-align: center;
+}
+
+/* List styling */
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  color: #555;
+}
+
+/* Modal animation (optional) */
+@keyframes modalFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  animation: modalFadeIn 0.5s ease;
+}
+
+.how-to-use {
+  background-color: #fdfdfd;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.how-to-use h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #007acc;
+}
+
+.how-to-use h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.how-to-use h4 {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.how-to-use ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.how-to-use ul li {
+  margin-bottom: 0.4rem;
+}
+
+.how-to-use code {
+  background-color: #eef;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-family: monospace;
+  color: #004080;
+}
+
+.how-to-use strong {
+  color: #222;
+}
+
+.how-to-use p {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .App-header {
+    padding: 20px;
+  }
+
+  .results table th,
+  .results table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}

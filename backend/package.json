@@ -1,0 +1,29 @@
+{
+  "name": "maintainability-index-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "antlr4": "^4.13.2",
+    "complexity-report": "^1.0.0",
+    "cors": "^2.8.5",
+    "escomplex": "^2.0.0-alpha",
+    "express": "^4.21.2",
+    "java-parser": "^2.3.2",
+    "json2csv": "^6.0.0-alpha.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9",
+    "php-parser": "^3.2.2",
+    "tree-sitter": "^0.21.1",
+    "tree-sitter-java": "^0.23.4"
+  }
+}
