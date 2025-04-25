@@ -41,6 +41,7 @@ function App() {
   const [modalContent, setModalContent] = useState(null);
   const [modalContent2, setModalContent2] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const handleFolderChange = (event) => {
     const file = event.target.files[0];
@@ -131,6 +132,7 @@ function App() {
       return;
     }
 
+    setIsDownloading(true);
     try {
       const response = await axios.post(`${config.BASE_URL}/api/maintainability/export-csv`, { analysisResults: results, dataClassResults, parallelResults }, { responseType: 'blob' });
 
@@ -147,6 +149,8 @@ function App() {
     } catch (err) {
       console.error(err);
       setError('An error occurred while exporting CSV. Please try again.');
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -157,7 +161,7 @@ function App() {
 
         <input type="file" accept=".zip" onChange={handleFolderChange} />
         <button onClick={handleAnalyze}> {isLoading ? 'Analyzing...' : 'Analyze'}</button>
-        <button onClick={handleDownloadCSV}>Download CSV</button>
+        <button onClick={handleDownloadCSV}> {isDownloading ? 'Downloading...' : 'Download CSV'}</button>
         <button onClick={() => handleModalOpen2()}>Guide</button>
         <button onClick={() => handleModalOpen()}>About</button>
 
