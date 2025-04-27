@@ -450,21 +450,14 @@ const calculateDIT = (className, classes, visited = new Set()) => {
   return totalDIT;
 };
 
-const calculateNOC = (className, classes, visited = new Set()) => {
-  if (!classes[className] || classes[className].children.length === 0) {
+const calculateNOC = (className, classes) => {
+  // Pastikan kelas ada dan memiliki anak langsung
+  if (!classes[className] || !classes[className].children) {
     return 0;
   }
 
-  let totalNOC = 0;
-
-  classes[className].children.forEach((child) => {
-    if (!visited.has(child)) {
-      visited.add(child);
-      totalNOC += 1 + calculateNOC(child, classes, visited);
-    }
-  });
-
-  return totalNOC;
+  // Cukup kembalikan jumlah anak langsung (children) dari kelas tersebut
+  return classes[className].children.length;
 };
 
 export const exportCsv = (req, res) => {
