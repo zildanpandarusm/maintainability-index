@@ -315,16 +315,22 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {parallelResults.map((item, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.fileName}</td>
-                    <td>{item.className}</td>
-                    <td>{item.DIT !== null ? item.DIT : '-'}</td>
-                    <td>{item.NOC !== null ? item.NOC : '-'}</td>
-                    <td style={{ color: item.isParallelInheritanceSmell ? 'red' : 'green' }}>{item.isParallelInheritanceSmell ? 'Detected' : 'Not Detected'}</td>
-                  </tr>
-                ))}
+                {parallelResults.map((item, index) => {
+                  // Cari fileName yang sesuai dari dataClassResults berdasarkan className
+                  const dataClassItem = dataClassResults.find((dataItem) => dataItem.className === item.className);
+                  const fileName = dataClassItem ? dataClassItem.fileName : item.fileName; // Jika ditemukan, ganti fileName, jika tidak gunakan fileName dari parallelResults
+
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{fileName}</td> {/* Menggunakan fileName yang sudah disesuaikan */}
+                      <td>{item.className}</td>
+                      <td>{item.DIT !== null ? item.DIT : '-'}</td>
+                      <td>{item.NOC !== null ? item.NOC : '-'}</td>
+                      <td style={{ color: item.isParallelInheritanceSmell ? 'red' : 'green' }}>{item.isParallelInheritanceSmell ? 'Detected' : 'Not Detected'}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
