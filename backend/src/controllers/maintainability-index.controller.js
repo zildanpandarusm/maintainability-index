@@ -60,7 +60,7 @@ function calculateMaintainabilityIndex(code) {
   }, 1);
 
   const operatorRegex =
-    /->|[+\-*/%&|^!~=]|\+\+|--|\+=|-=|\*=|\/=|%=|&=|\|=|\^=|<<=|>>=|\?\:|\.\.\.|::|\.|\?\?=|@|==|===|!=|<>|!==|<=|>=|&&|\|\||<|>|\?=\?|if|else|elseif|for|while|foreach|switch|case|default|break|continue|goto|declare|try|catch|finally|throw/g;
+    /->|[+\-*/%&|^!~=]|\+\+|--|\+=|-=|\*=|\/=|%=|&=|\|=|\^=|<<=|>>=|\?\:|\.\.\.|::|\.|\?\?=|@|==|===|!=|<>|!==|<=|>=|&&|\|\||<|>|\?=\?|if|else|elseif|for|while|foreach|switch|case|default|break|continue|goto|declare|try|catch|finally|throw|\(|\)|\{|\}|return/g;
 
   // Operand regex tetap sama
   const operandRegex =
