@@ -59,8 +59,13 @@ function calculateMaintainabilityIndex(code) {
     return complexity + (matches ? matches.length : 0);
   }, 1);
 
-  const operatorRegex = /[+\-*/%&|^=<>!?:,.;(){}[\]]/g;
-  const operandRegex = /[a-zA-Z_][a-zA-Z0-9_]*/g;
+  const operatorRegex =
+    /->|[+\-*/%&|^!~=]|\+\+|--|\+=|-=|\*=|\/=|%=|&=|\|=|\^=|<<=|>>=|\?\:|\.\.\.|::|\.|\?\?=|@|==|===|!=|<>|!==|<=|>=|&&|\|\||<|>|\?=\?|if|else|elseif|for|while|foreach|switch|case|default|break|continue|goto|declare|try|catch|finally|throw/g;
+
+  // Operand regex tetap sama
+  const operandRegex =
+    /(?:\$this(?:->\w+)?)|(?:\$[a-zA-Z_][a-zA-Z0-9_]*)|\b(?!function|class|public|private|protected|static|abstract|final|return|if|else|elseif|for|while|do|switch|case|try|catch|finally|foreach|new|instanceof|echo|mysqli_connect_error|string|int|float|bool|array|object|null|void|php|var|namespace|require|include|use|extends|implements|interface|trait)\w+\b|\d+(\.\d+)?|".*?"|'(.*?)'/g;
+
   const operators = code.match(operatorRegex) || [];
   const operands = code.match(operandRegex) || [];
   const n1 = new Set(operators).size;
