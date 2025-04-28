@@ -1,6 +1,6 @@
-import AdmZip from 'adm-zip';
-import phpParser from 'php-parser';
-import { Parser as Json2CsvParser } from 'json2csv';
+// import AdmZip from 'adm-zip';
+// import phpParser from 'php-parser';
+// import { Parser as Json2CsvParser } from 'json2csv';
 
 // // Fungsi untuk membaca file Java dalam ZIP
 // const getPhpFilesFromZip = (zipBuffer) => {
@@ -524,6 +524,11 @@ import { Parser as Json2CsvParser } from 'json2csv';
 //   }
 // };
 
+import AdmZip from 'adm-zip';
+// import { calculateMaintainabilityIndex, calculateMetrics, calculateWMC, calculateLCOM, checkIfDataClass, findLongMethods } from '../services/maintainability-index.service.js';
+
+import phpParser from 'php-parser'; //
+
 // Fungsi untuk membaca file Java dalam ZIP
 const getPhpFilesFromZip = (zipBuffer) => {
   const zip = new AdmZip(zipBuffer);
@@ -653,6 +658,7 @@ function removeComments(code) {
   // Menggunakan regex untuk menghapus komentar satu baris (//) dan komentar multi-baris (/*...*/)
   return code.replace(/\/\/[^\n]*|\/\*[\s\S]*?\*\//g, '');
 }
+
 export const detectDataClassSmell = (req, res) => {
   try {
     const zipBuffer = req.file.buffer;
