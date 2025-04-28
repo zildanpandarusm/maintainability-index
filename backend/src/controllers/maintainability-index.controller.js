@@ -45,7 +45,8 @@ export const analyzeCodeFromZip = (req, res) => {
   }
 };
 
-function calculateMaintainabilityIndex(code) {
+function calculateMaintainabilityIndex(code1) {
+  const code = removeComments(code1);
   const linesOfCode = code.split('\n').filter((line) => line.trim().length > 0).length;
   const singleLineComments = code.split('\n').filter((line) => line.includes('//')).length;
   const multiLineComments = (code.match(/\/\*[\s\S]*?\*\//g) || []).length;
@@ -60,7 +61,7 @@ function calculateMaintainabilityIndex(code) {
   }, 1);
 
   const operatorRegex =
-    /->|[+\-*/%&|^!~=]|\+\+|--|\+=|-=|\*=|\/=|%=|&=|\|=|\^=|<<=|>>=|\?\:|\.\.\.|::|\.|\?\?=|@|==|===|!=|<>|!==|<=|>=|&&|\|\||<|>|\?=\?|if|else|elseif|for|while|foreach|switch|case|default|break|continue|goto|declare|try|catch|finally|throw|\(|\)|\{|\}|return/g;
+    /->|=>|[+\-*/%&|^!~=]|\+\+|--|\+=|-=|\*=|\/=|%=|&=|\|=|\^=|<<=|>>=|\?\:|\.\.\.|::|\.|\?\?=|@|==|===|!=|<>|!==|<=|>=|&&|\|\||<|>|\?=\?|if|else|elseif|for|while|foreach|switch|case|default|break|continue|goto|declare|try|catch|finally|throw|\(|\)|\{|\}|return/g;
 
   // Operand regex tetap sama
   const operandRegex =
@@ -99,6 +100,11 @@ function calculateMaintainabilityIndex(code) {
     color,
     explanation,
   };
+}
+
+function removeComments(code) {
+  // Menggunakan regex untuk menghapus komentar satu baris (//) dan komentar multi-baris (/*...*/)
+  return code.replace(/\/\/[^\n]*|\/\*[\s\S]*?\*\//g, '');
 }
 
 export const detectDataClassSmell = (req, res) => {
@@ -396,15 +402,15 @@ const buildInheritanceMap = (phpFiles) => {
 const walkAstForInheritance = (node, classes, fileName) => {
   if (!node) return;
 
-  if (node.kind === 'class') {
-    const className = node.name.name;
+  if (node.kind === 'class' && node.name) {
+    const className = node.name.name; // Safe access to node.name.name
     const parentName = node.extends ? node.extends.name : null;
 
     // Tambahkan fileName ke data class
     classes[className] = classes[className] || {
       parents: [],
       children: [],
-      fileName: fileName, //  assign fileName di sini
+      fileName: fileName, // assign fileName di sini
     };
 
     if (parentName) {
