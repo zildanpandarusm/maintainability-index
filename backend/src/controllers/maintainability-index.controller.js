@@ -47,13 +47,13 @@ export const analyzeCodeFromZip = (req, res) => {
 
 function calculateMaintainabilityIndex(code1) {
   const code = removeComments(code1);
-  const linesOfCode = code.split('\n').filter((line) => line.trim().length > 0).length;
+  const linesOfCode = code.split('\n').filter((line) => line.trim().length > 0).length || 1;
   const singleLineComments = code.split('\n').filter((line) => line.includes('//')).length;
   const multiLineComments = (code.match(/\/\*[\s\S]*?\*\//g) || []).length;
   const commentLines = singleLineComments + multiLineComments;
   const perCM = (commentLines / linesOfCode) * 100;
 
-  const controlFlowKeywords = ['if', 'else if', 'for', 'while', 'switch', 'case', 'catch'];
+  const controlFlowKeywords = ['if', 'else if', 'for', 'while', 'switch', 'case', 'catch', 'try', 'throw', 'finally'];
   const cyclomaticComplexity = controlFlowKeywords.reduce((complexity, keyword) => {
     const regex = keyword === 'else if' ? /\belse\s+if\b/g : new RegExp(`\\b${keyword}\\b`, 'g');
     const matches = code.match(regex);
@@ -63,7 +63,6 @@ function calculateMaintainabilityIndex(code1) {
   const operatorRegex =
     /->|=>|[+\-*/%&|^!~=]|\+\+|--|\+=|-=|\*=|\/=|%=|&=|\|=|\^=|<<=|>>=|\?\:|\.\.\.|::|\.|\?\?=|@|==|===|!=|<>|!==|<=|>=|&&|\|\||<|>|\?=\?|if|else|elseif|for|while|foreach|switch|case|default|break|continue|goto|declare|try|catch|finally|throw|\(|\)|\{|\}|return/g;
 
-  // Operand regex tetap sama
   const operandRegex =
     /(?:\$this(?:->\w+)?)|(?:\$[a-zA-Z_][a-zA-Z0-9_]*)|\b(?!function|class|public|private|protected|static|abstract|final|return|if|else|elseif|for|while|do|switch|case|try|catch|finally|foreach|new|instanceof|echo|mysqli_connect_error|string|int|float|bool|array|object|null|void|php|var|namespace|require|include|use|extends|implements|interface|trait)\w+\b|\d+(\.\d+)?|".*?"|'(.*?)'/g;
 
@@ -74,9 +73,12 @@ function calculateMaintainabilityIndex(code1) {
   const N1 = operators.length;
   const N2 = operands.length;
 
-  const halsteadVolume = (N1 + N2) * Math.log2(n1 + n2);
+  const vocab = n1 + n2 || 1;
+  const length = N1 + N2;
 
-  let maintainabilityIndex = 171 - 5.2 * Math.log(halsteadVolume) - 0.23 * cyclomaticComplexity - 16.2 * Math.log(linesOfCode);
+  const halsteadVolume = length * Math.log2(vocab);
+
+  let maintainabilityIndex = 171 - 5.2 * Math.log(halsteadVolume || 1) - 0.23 * cyclomaticComplexity - 16.2 * Math.log(linesOfCode || 1);
 
   maintainabilityIndex = Math.max(maintainabilityIndex, 0);
 

@@ -174,8 +174,21 @@ function App() {
               <>
                 <div className="chart-container">
                   <h2>Maintainability Index Distribution</h2>
-                  <PieChart width={500} height={400}>
-                    <Pie data={calculatePieChartData(results)} cx="50%" cy="50%" outerRadius={120} fill="#8884d8" dataKey="value" label={({ name, percent }) => `${name}: ${percent}%`}>
+                  <PieChart width={700} height={400}>
+                    <Pie
+                      data={calculatePieChartData(results)}
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={120}
+                      fill="#8884d8"
+                      dataKey="value"
+                      label={({ name, value, percent }) => {
+                        // Hitung persentase secara manual
+                        const totalValue = calculatePieChartData(results).reduce((sum, item) => sum + item.value, 0);
+                        const percentage = ((value / totalValue) * 100).toFixed(1);
+                        return `${name}: ${value} (${percentage}%)`; // Menambahkan value dan persentase
+                      }}
+                    >
                       {calculatePieChartData(results).map((_, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
