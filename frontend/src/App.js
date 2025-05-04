@@ -120,6 +120,13 @@ function App() {
     setIsModalOpen2(false); // Close the modal
   };
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const getMaintainabilityClass = (index) => {
     if (index > 85) return 'maintainability-high'; // Nilai tinggi
     if (index > 65 && index <= 85) return 'maintainability-medium'; // Nilai sedang
@@ -173,7 +180,9 @@ function App() {
             {results.length > 0 && (
               <>
                 <div className="chart-container">
-                  <h2>Maintainability Index Distribution</h2>
+                  <h2 id="maintainability-title" onClick={() => scrollToSection('maintainability-table')} style={{ cursor: 'pointer' }}>
+                    Maintainability Index Distribution
+                  </h2>
                   <PieChart width={700} height={400}>
                     <Pie
                       data={calculatePieChartData(results)}
@@ -201,7 +210,9 @@ function App() {
             )}
             {dataClassResults.length > 0 && (
               <div className="chart-container">
-                <h2>Data Class Smell</h2>
+                <h2 id="dataclass-title" onClick={() => scrollToSection('dataclass-table')} style={{ cursor: 'pointer' }}>
+                  Data Class Smell
+                </h2>
                 <PieChart width={700} height={400}>
                   <Pie
                     data={[
@@ -226,7 +237,9 @@ function App() {
 
             {parallelResults.length > 0 && (
               <div className="chart-container">
-                <h2>Parallel Inheritance Hierarchies Smell</h2>
+                <h2 id="parallel-title" onClick={() => scrollToSection('parallel-table')} style={{ cursor: 'pointer' }}>
+                  Parallel Inheritance Hierarchies Smell
+                </h2>
                 <PieChart width={700} height={400}>
                   <Pie
                     data={[
@@ -254,7 +267,7 @@ function App() {
         )}
 
         {results.length > 0 ? (
-          <div className="results">
+          <div className="results" id="maintainability-table">
             <h2>Analyze Results Maintainability Index</h2>
             <table>
               <thead>
@@ -282,7 +295,7 @@ function App() {
         )}
 
         {dataClassResults.length > 0 && (
-          <div className="results">
+          <div className="results" id="dataclass-table">
             <h2>Data Class Smell Detection</h2>
             <div className="chart-container"></div>
 
@@ -314,7 +327,7 @@ function App() {
         )}
 
         {parallelResults.length > 0 && (
-          <div className="results">
+          <div className="results" id="parallel-table">
             <h2>Parallel Inheritance Hierarchies Smell Detection</h2>
             <table>
               <thead>
