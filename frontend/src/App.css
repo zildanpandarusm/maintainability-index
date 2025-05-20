@@ -121,6 +121,10 @@ button:hover {
   background-color: #519aff;
 }
 
+.file-number-column {
+  width: 70px;
+}
+
 .highlight-red {
   color: #cc0000; /* Dark red text for contrast */
   font-weight: bold; /* Optional: Make the text bold for emphasis */

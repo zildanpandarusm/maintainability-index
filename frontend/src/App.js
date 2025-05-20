@@ -272,7 +272,7 @@ function App() {
             <table>
               <thead>
                 <tr>
-                  <th>File Number</th>
+                  <th className="file-number-column">File Number</th>
                   <th>File Name</th>
                   <th>Maintainability Index</th>
                   <th>Explanation</th>
@@ -302,7 +302,7 @@ function App() {
             <table>
               <thead>
                 <tr>
-                  <th>No</th>
+                  <th className="file-number-column">No</th>
                   <th>File Name</th>
                   <th>Class Name</th>
                   <th>WMC</th>
@@ -332,7 +332,7 @@ function App() {
             <table>
               <thead>
                 <tr>
-                  <th>No</th>
+                  <th className="file-number-column">No</th>
                   <th>File Name</th>
                   <th>Class Name</th>
                   <th>DIT</th>
