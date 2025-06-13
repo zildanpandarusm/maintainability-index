@@ -404,7 +404,7 @@ function App() {
             </ul>
 
             <h3>What Developers Can Do:</h3>
-            <p>If your code has a low MI score (≤ 65), here are some suggestions to improve it:</p>
+            <p>If your code has a low MI score (&lt; 65), here are some suggestions to improve it:</p>
             <ul>
               <li>
                 <strong>Reduce LOC:</strong> Consider breaking large files or methods into smaller, more focused units. Avoid redundant code and move reusable logic into shared functions or classes.
