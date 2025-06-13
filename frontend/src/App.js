@@ -372,16 +372,16 @@ function App() {
             </button>
 
             <h1>Maintainability Index</h1>
-            <p>The Maintainability Index is a metric used to measure how easy or difficult it is to maintain or modify code in the future. It is calculated based on three key factors:</p>
+            <p>The Maintainability Index (MI) is a metric used to measure how easy or difficult it is to maintain or modify code in the future. It is calculated based on three key factors:</p>
             <ul>
               <li>
-                <strong>Lines of Code (LOC)</strong>
+                <strong>Lines of Code (LOC):</strong> The size of the code — the larger the codebase, the harder it is to maintain.
               </li>
               <li>
-                <strong>Cyclomatic Complexity (CC)</strong>
+                <strong>Cyclomatic Complexity (CC):</strong> The number of decision points in the code — higher values indicate more complex logic.
               </li>
               <li>
-                <strong>Halstead Volume (HV)</strong>
+                <strong>Halstead Volume (HV):</strong> A measure of code complexity based on the number of operators and operands — high HV indicates semantic complexity.
               </li>
             </ul>
 
@@ -393,13 +393,30 @@ function App() {
             <h3>Classification:</h3>
             <ul>
               <li>
-                <strong>MI &gt; 85</strong>: Very Easy to Maintain
+                <strong>MI &gt; 85:</strong> Very Easy to Maintain
               </li>
               <li>
-                <strong>65 &lt; MI ≤ 85</strong>: Fairly Easy to Maintain
+                <strong>65 ≤ MI ≤ 85:</strong> Fairly Easy to Maintain
               </li>
               <li>
-                <strong>MI ≤ 65</strong>: Difficult to Maintain
+                <strong>MI &lt; 65:</strong> Difficult to Maintain
+              </li>
+            </ul>
+
+            <h3>What Developers Can Do:</h3>
+            <p>If your code has a low MI score (≤ 65), here are some suggestions to improve it:</p>
+            <ul>
+              <li>
+                <strong>Reduce LOC:</strong> Consider breaking large files or methods into smaller, more focused units. Avoid redundant code and move reusable logic into shared functions or classes.
+              </li>
+              <li>
+                <strong>Reduce CC:</strong> Simplify complex conditional statements (e.g., deeply nested if-else or switch-case) and aim for more linear, readable logic. Use guard clauses and smaller functions when possible.
+              </li>
+              <li>
+                <strong>Reduce HV:</strong> Minimize the number of distinct variables and operations in methods. Use meaningful naming and avoid deeply abstract or overly mathematical logic unless absolutely necessary.
+              </li>
+              <li>
+                <strong>Improve Documentation:</strong> While not included in MI, adding clear comments and documentation helps offset complexity and makes maintenance easier.
               </li>
             </ul>
 
